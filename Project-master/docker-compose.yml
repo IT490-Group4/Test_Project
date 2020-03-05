@@ -6,9 +6,14 @@ services:
             - 15672:15672
     mysql:
         image: 'mysql'
+        # README: https://stackoverflow.com/questions/50557234/authentication-plugin-caching-sha2-password-is-not-supported
+        # README: https://hub.docker.com/_/mysql
+        #command: --default-authentication-plugin=mysql_native_password
         environment:
             MYSQL_ROOT_PASSWORD: changeme
             MYSQL_DATABASE: testapp
+        # You only need this if you are accessing your database
+        # outside of the docker network
         ports:
           - "3308:3306"
     admin:    
@@ -24,4 +29,7 @@ services:
 
     recieve:
         build: './Backend/Receive'
+
+    backend_sql_test:
+        build: './Backend/SQL'
     

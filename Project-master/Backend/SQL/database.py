@@ -2,7 +2,9 @@ import mysql.connector
 
 print("after import")
 
-cnx = mysql.connector.connect(user='root', password='changeme', host = '172.22.0.1', port = 8080, database='testapp')
+# host can be 'mysql' because docker-compose automagically (TM) does name
+# resolution for us. Also, mysql runs on port 3306, not 8080.
+cnx = mysql.connector.connect(user='root', password='changeme', host = 'mysql', port = 3306, database='testapp')
 
 cursor = cnx.cursor()
 
